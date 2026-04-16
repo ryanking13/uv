@@ -26,18 +26,17 @@ uv-cache-info = { version = "0.0.39", path = "crates/uv-cache-info" }
 uv-cache-key = { version = "0.0.39", path = "crates/uv-cache-key" }
 uv-cli = { version = "0.0.39", path = "crates/uv-cli" }
 uv-client = { version = "0.0.39", path = "crates/uv-client" }
-uv-configuration = { version = "0.0.39", path = "crates/uv-configuration" }
+uv-configuration = { version = "0.0.39", path = "crates/uv-configuration", default-features = false }
 uv-console = { version = "0.0.39", path = "crates/uv-console" }
 uv-dirs = { version = "0.0.39", path = "crates/uv-dirs" }
 uv-dispatch = { version = "0.0.39", path = "crates/uv-dispatch" }
 uv-distribution = { version = "0.0.39", path = "crates/uv-distribution" }
 uv-distribution-filename = { version = "0.0.39", path = "crates/uv-distribution-filename" }
-uv-distribution-types = { version = "0.0.39", path = "crates/uv-distribution-types" }
+uv-distribution-types = { version = "0.0.39", path = "crates/uv-distribution-types", default-features = false }
 uv-extract = { version = "0.0.39", path = "crates/uv-extract" }
 uv-flags = { version = "0.0.39", path = "crates/uv-flags" }
 uv-fs = { version = "0.0.39", path = "crates/uv-fs", features = [
   "serde",
-  "tokio",
 ] }
 uv-git = { version = "0.0.39", path = "crates/uv-git" }
 uv-git-types = { version = "0.0.39", path = "crates/uv-git-types" }
@@ -147,7 +146,7 @@ fastrand = { version = "2.3.0" }
 flate2 = { version = "1.0.33", default-features = false, features = [
   "zlib-rs",
 ] }
-fs-err = { version = "3.2.2", features = ["tokio"] }
+fs-err = { version = "3.2.2" }
 futures = { version = "0.3.30" }
 glob = { version = "0.3.1" }
 globset = { version = "0.4.15" }
@@ -256,12 +255,8 @@ textwrap = { version = "0.16.1" }
 thiserror = { version = "2.0.0" }
 astral-tl = { version = "0.7.11" }
 tokio = { version = "1.40.0", features = [
-  "fs",
   "io-util",
   "macros",
-  "process",
-  "rt",
-  "signal",
   "sync",
   "time",
 ] }

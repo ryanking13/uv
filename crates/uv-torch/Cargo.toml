@@ -10,7 +10,7 @@ authors = { workspace = true }
 license = { workspace = true }
 
 [dependencies]
-uv-distribution-types = { workspace = true }
+uv-distribution-types = { workspace = true, features = ["native"] }
 uv-normalize = { workspace = true }
 uv-pep440 = { workspace = true }
 uv-platform-tags = { workspace = true }

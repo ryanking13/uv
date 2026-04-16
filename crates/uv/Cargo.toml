@@ -25,12 +25,12 @@ uv-cache-info = { workspace = true }
 uv-cache-key = { workspace = true }
 uv-cli = { workspace = true }
 uv-client = { workspace = true }
-uv-configuration = { workspace = true }
+uv-configuration = { workspace = true, features = ["native"] }
 uv-console = { workspace = true }
 uv-dispatch = { workspace = true }
 uv-distribution = { workspace = true }
 uv-distribution-filename = { workspace = true }
-uv-distribution-types = { workspace = true }
+uv-distribution-types = { workspace = true, features = ["native"] }
 uv-extract = { workspace = true }
 uv-flags = { workspace = true }
 uv-fs = { workspace = true }

@@ -87,6 +87,7 @@ pub use crate::traits::*;
 
 mod annotation;
 mod any;
+mod auth;
 mod build_info;
 mod build_requires;
 mod buildable;

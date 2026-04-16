@@ -17,8 +17,8 @@ doctest = false
 workspace = true
 
 [dependencies]
-uv-configuration = { workspace = true }
-uv-distribution-types = { workspace = true }
+uv-configuration = { workspace = true, features = ["native"] }
+uv-distribution-types = { workspace = true, features = ["native"] }
 uv-normalize = { workspace = true }
 uv-pep440 = { workspace = true }
 uv-pep508 = { workspace = true }

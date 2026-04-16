@@ -16,11 +16,11 @@ doctest = false
 workspace = true
 
 [dependencies]
-uv-auth = { workspace = true }
-uv-cache = { workspace = true }
-uv-cache-info = { workspace = true }
+uv-auth = { workspace = true, optional = true }
+uv-cache = { workspace = true, optional = true }
+uv-cache-info = { workspace = true, optional = true }
 uv-distribution-types = { workspace = true }
-uv-git = { workspace = true }
+uv-git = { workspace = true, optional = true }
 uv-normalize = { workspace = true }
 uv-pep440 = { workspace = true }
 uv-pep508 = { workspace = true, features = ["schemars"] }
@@ -31,13 +31,13 @@ uv-static = { workspace = true }
 clap = { workspace = true, features = ["derive"], optional = true }
 either = { workspace = true }
 fs-err = { workspace = true }
-rayon = { workspace = true }
-reqwest = { workspace = true }
+rayon = { workspace = true, optional = true }
+reqwest = { workspace = true, optional = true }
 rustc-hash = { workspace = true }
 same-file = { workspace = true }
 schemars = { workspace = true, optional = true }
 serde = { workspace = true }
-tokio = { workspace = true }
+tokio = { workspace = true, optional = true }
 serde-untagged = { workspace = true }
 thiserror = { workspace = true }
 tracing = { workspace = true }
@@ -49,4 +49,14 @@ insta = { workspace = true }
 serde_json = { workspace = true }
 
 [features]
-default = []
+default = ["native"]
+native = [
+  "dep:uv-auth",
+  "dep:uv-cache",
+  "dep:uv-cache-info",
+  "dep:uv-git",
+  "dep:rayon",
+  "dep:reqwest",
+  "dep:tokio",
+  "uv-distribution-types/native",
+]

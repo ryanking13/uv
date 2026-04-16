@@ -18,9 +18,9 @@ workspace = true
 [dependencies]
 uv-auth = { workspace = true }
 uv-cache-key = { workspace = true }
-uv-configuration = { workspace = true }
+uv-configuration = { workspace = true, features = ["native"] }
 uv-distribution = { workspace = true }
-uv-distribution-types = { workspace = true }
+uv-distribution-types = { workspace = true, features = ["native"] }
 uv-fs = { workspace = true }
 uv-normalize = { workspace = true }
 uv-pep440 = { workspace = true }

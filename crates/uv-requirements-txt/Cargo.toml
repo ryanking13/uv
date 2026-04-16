@@ -17,8 +17,8 @@ workspace = true
 
 [dependencies]
 uv-client = { workspace = true }
-uv-configuration = { workspace = true }
-uv-distribution-types = { workspace = true }
+uv-configuration = { workspace = true, features = ["native"] }
+uv-distribution-types = { workspace = true, features = ["native"] }
 uv-fs = { workspace = true }
 uv-normalize = { workspace = true }
 uv-pep508 = { workspace = true }

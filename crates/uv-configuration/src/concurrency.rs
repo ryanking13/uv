@@ -2,7 +2,19 @@ use std::fmt;
 use std::num::NonZeroUsize;
 use std::sync::Arc;
 
+#[cfg(feature = "native")]
 use tokio::sync::Semaphore;
+
+#[cfg(not(feature = "native"))]
+#[derive(Debug)]
+pub struct Semaphore;
+
+#[cfg(not(feature = "native"))]
+impl Semaphore {
+    pub const fn new(_: usize) -> Self {
+        Self
+    }
+}
 
 /// Concurrency limit settings.
 // TODO(konsti): We should find a pattern that doesn't require having both semaphores and counts.

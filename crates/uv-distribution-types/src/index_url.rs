@@ -9,12 +9,12 @@ use itertools::Either;
 use rustc_hash::{FxHashMap, FxHashSet};
 use thiserror::Error;
 use url::{ParseError, Url};
-use uv_auth::RealmRef;
 use uv_cache_key::CanonicalUrl;
 use uv_pep508::{Scheme, VerbatimUrl, VerbatimUrlError, split_scheme};
 use uv_redacted::DisplaySafeUrl;
 use uv_warnings::warn_user;
 
+use crate::auth::RealmRef;
 use crate::{ExcludeNewerOverride, Index, IndexStatusCodeStrategy, Verbatim};
 
 static PYPI_URL: LazyLock<DisplaySafeUrl> =
@@ -470,6 +470,7 @@ impl<'a> IndexLocations {
     }
 }
 
+#[cfg(feature = "native")]
 impl From<&IndexLocations> for uv_auth::Indexes {
     fn from(index_locations: &IndexLocations) -> Self {
         Self::from_indexes(index_locations.allowed_indexes().into_iter().map(|index| {
@@ -762,7 +763,7 @@ mod tests {
                 origin: None,
                 format: IndexFormat::Simple,
                 publish_url: None,
-                authenticate: uv_auth::AuthPolicy::default(),
+                authenticate: crate::auth::AuthPolicy::default(),
                 ignore_error_codes: None,
                 exclude_newer: None,
             },
@@ -775,7 +776,7 @@ mod tests {
                 origin: None,
                 format: IndexFormat::Simple,
                 publish_url: None,
-                authenticate: uv_auth::AuthPolicy::default(),
+                authenticate: crate::auth::AuthPolicy::default(),
                 ignore_error_codes: None,
                 exclude_newer: None,
             },
@@ -814,7 +815,7 @@ mod tests {
             origin: None,
             format: IndexFormat::Simple,
             publish_url: None,
-            authenticate: uv_auth::AuthPolicy::default(),
+            authenticate: crate::auth::AuthPolicy::default(),
             ignore_error_codes: None,
             exclude_newer: None,
         }];
@@ -861,7 +862,7 @@ mod tests {
             origin: None,
             format: IndexFormat::Simple,
             publish_url: None,
-            authenticate: uv_auth::AuthPolicy::default(),
+            authenticate: crate::auth::AuthPolicy::default(),
             ignore_error_codes: None,
             exclude_newer: None,
         }];
@@ -904,7 +905,7 @@ mod tests {
             origin: None,
             format: IndexFormat::Simple,
             publish_url: None,
-            authenticate: uv_auth::AuthPolicy::default(),
+            authenticate: crate::auth::AuthPolicy::default(),
             ignore_error_codes: None,
             exclude_newer: None,
         }];

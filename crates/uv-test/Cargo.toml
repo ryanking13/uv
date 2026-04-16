@@ -25,7 +25,7 @@ tracing-durations-export = []
 [dependencies]
 uv-cache = { workspace = true, features = ["clap"] }
 uv-client = { workspace = true }
-uv-configuration = { workspace = true }
+uv-configuration = { workspace = true, features = ["native"] }
 uv-fs = { workspace = true }
 uv-preview = { workspace = true }
 uv-python = { workspace = true }

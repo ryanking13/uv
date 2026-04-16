@@ -12,6 +12,7 @@ use url::Url;
 use uv_cache_info::CacheInfo;
 use uv_distribution_filename::{EggInfoFilename, ExpandedTags};
 use uv_fs::Simplified;
+#[cfg(feature = "native")]
 use uv_install_wheel::WheelFile;
 use uv_normalize::PackageName;
 use uv_pep440::Version;
@@ -42,6 +43,7 @@ pub enum InstalledDistError {
     #[error(transparent)]
     PackageNameParse(#[from] uv_normalize::InvalidNameError),
 
+    #[cfg(feature = "native")]
     #[error(transparent)]
     WheelFileParse(#[from] uv_install_wheel::Error),
 
@@ -500,14 +502,17 @@ impl InstalledDist {
 
         // Read the `WHEEL` file.
         let contents = fs_err::read_to_string(path.join("WHEEL"))?;
-        let wheel_file = WheelFile::parse(&contents)?;
-
-        // Parse the tags.
-        let tags = if let Some(tags) = wheel_file.tags() {
-            Some(ExpandedTags::parse(tags.iter().map(String::as_str))?)
-        } else {
-            None
+        #[cfg(feature = "native")]
+        let tags = {
+            let wheel_file = WheelFile::parse(&contents)?;
+            if let Some(tags) = wheel_file.tags() {
+                Some(ExpandedTags::parse(tags.iter().map(String::as_str))?)
+            } else {
+                None
+            }
         };
+        #[cfg(not(feature = "native"))]
+        let tags: Option<ExpandedTags> = None;
 
         let _ = self.tags_cache.set(tags);
         Ok(self.tags_cache.get().expect("tags should be set").as_ref())

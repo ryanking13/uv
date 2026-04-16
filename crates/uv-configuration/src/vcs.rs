@@ -1,8 +1,13 @@
-use std::io::Write;
 use std::path::{Path, PathBuf};
+
+#[cfg(feature = "native")]
+use std::io::Write;
+#[cfg(feature = "native")]
 use std::process::{Command, Stdio};
 
 use serde::Deserialize;
+
+#[cfg(feature = "native")]
 use uv_git::GIT;
 
 #[derive(Debug, thiserror::Error)]
@@ -32,6 +37,7 @@ pub enum VersionControlSystem {
 
 impl VersionControlSystem {
     /// Initializes the VCS system based on the provided path.
+    #[cfg(feature = "native")]
     pub fn init(&self, path: &Path) -> Result<(), VersionControlError> {
         match self {
             Self::Git => {
@@ -72,6 +78,15 @@ impl VersionControlSystem {
             Self::None => Ok(()),
         }
     }
+
+    /// Initializes the VCS system based on the provided path.
+    #[cfg(not(feature = "native"))]
+    pub fn init(&self, _path: &Path) -> Result<(), VersionControlError> {
+        match self {
+            Self::Git => Err(VersionControlError::GitNotInstalled),
+            Self::None => Ok(()),
+        }
+    }
 }
 
 impl std::fmt::Display for VersionControlSystem {
@@ -83,6 +98,7 @@ impl std::fmt::Display for VersionControlSystem {
     }
 }
 
+#[cfg(feature = "native")]
 const GITIGNORE: &str = "# Python-generated files
 __pycache__/
 *.py[oc]

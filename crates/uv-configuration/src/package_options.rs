@@ -2,7 +2,9 @@ use std::path::Path;
 
 use rustc_hash::{FxHashMap, FxHashSet};
 
+#[cfg(feature = "native")]
 use uv_cache::Refresh;
+#[cfg(feature = "native")]
 use uv_cache_info::Timestamp;
 use uv_distribution_types::{Requirement, RequirementSource};
 use uv_normalize::{GroupName, PackageName};
@@ -119,6 +121,7 @@ impl Reinstall {
 }
 
 /// Create a [`Refresh`] policy by integrating the [`Reinstall`] policy.
+#[cfg(feature = "native")]
 impl From<Reinstall> for Refresh {
     fn from(value: Reinstall) -> Self {
         match value {
@@ -301,6 +304,7 @@ impl Upgrade {
 }
 
 /// Create a [`Refresh`] policy by integrating the [`Upgrade`] policy.
+#[cfg(feature = "native")]
 impl From<Upgrade> for Refresh {
     fn from(value: Upgrade) -> Self {
         match value.strategy {

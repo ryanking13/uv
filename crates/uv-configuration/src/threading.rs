@@ -1,7 +1,12 @@
 //! Configure rayon and determine thread stack sizes.
 
+use std::sync::atomic::AtomicUsize;
+
+#[cfg(feature = "native")]
 use std::sync::Once;
-use std::sync::atomic::{AtomicUsize, Ordering};
+#[cfg(feature = "native")]
+use std::sync::atomic::Ordering;
+
 use uv_static::EnvVars;
 
 /// The default minimum stack size for uv threads.
@@ -60,6 +65,7 @@ pub static RAYON_PARALLELISM: AtomicUsize = AtomicUsize::new(0);
 /// The `uv` crate sets [`RAYON_PARALLELISM`] from the user settings, and the extract and install
 /// code initializes the threadpool lazily only if it is actually used by calling
 /// [`initialize_rayon_once`].
+#[cfg(feature = "native")]
 pub fn initialize_rayon_once() {
     static ONCE: Once = Once::new();
     ONCE.call_once(|| {
@@ -70,3 +76,6 @@ pub fn initialize_rayon_once() {
             .expect("failed to initialize global rayon pool");
     });
 }
+
+#[cfg(not(feature = "native"))]
+pub fn initialize_rayon_once() {}

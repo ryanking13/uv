@@ -18,8 +18,8 @@ workspace = true
 [dependencies]
 uv-build-backend = { workspace = true, features = ["schemars"] }
 uv-cache-key = { workspace = true }
-uv-configuration = { workspace = true }
-uv-distribution-types = { workspace = true }
+uv-configuration = { workspace = true, features = ["native"] }
+uv-distribution-types = { workspace = true, features = ["native"] }
 uv-fs = { workspace = true, features = ["tokio", "schemars"] }
 uv-git-types = { workspace = true }
 uv-macros = { workspace = true }

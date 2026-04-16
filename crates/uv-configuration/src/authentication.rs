@@ -1,4 +1,5 @@
-use uv_auth::{self, KeyringProvider};
+#[cfg(feature = "native")]
+use uv_auth::KeyringProvider;
 
 /// Keyring provider type to use for credential lookup.
 #[derive(Debug, Default, Clone, Copy, PartialEq, Eq, serde::Serialize, serde::Deserialize)]
@@ -19,6 +20,7 @@ pub enum KeyringProviderType {
 // See <https://pip.pypa.io/en/stable/topics/authentication/#keyring-support> for details.
 
 impl KeyringProviderType {
+    #[cfg(feature = "native")]
     pub fn to_provider(&self) -> Option<KeyringProvider> {
         match self {
             Self::Disabled => None,

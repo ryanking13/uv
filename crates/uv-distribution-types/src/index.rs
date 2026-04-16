@@ -6,10 +6,10 @@ use serde::{Deserialize, Serialize, Serializer};
 use thiserror::Error;
 use url::Url;
 
-use uv_auth::{AuthPolicy, Credentials};
 use uv_redacted::DisplaySafeUrl;
 use uv_small_str::SmallString;
 
+use crate::auth::{AuthPolicy, Credentials};
 use crate::exclude_newer::ExcludeNewerOverride;
 use crate::index_name::{IndexName, IndexNameError};
 use crate::origin::Origin;
